@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:lontarata_app/pages/pages.dart';
-import 'package:lontarata_app/shared/shared.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,27 +16,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        // ubah ke MaterialColor valid
-        primarySwatch: Colors.blue,
-        inputDecorationTheme: InputDecorationTheme(
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: const Color.fromARGB(201, 158, 123, 100),
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: const Color.fromARGB(255, 255, 0, 0)),
-          ),
-          labelStyle: TextStyle(color: Colors.black),
-        ),
-
-        primaryColor: primaryColor,
-        canvasColor: Colors.transparent,
-      ),
-      home: LontaraHomePage(),
+      home: WellcomePage(),
     );
   }
 }

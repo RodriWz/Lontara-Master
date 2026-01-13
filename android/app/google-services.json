@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "305682319496",
+    "project_id": "lontara-app-d3adc",
+    "storage_bucket": "lontara-app-d3adc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305682319496:android:c3ae1c9500cdcfad66f73d",
+        "android_client_info": {
+          "package_name": "com.example.lontarata_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnXSdroAc1gS5hsMkiQSKvE19Qd2eC-qQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
