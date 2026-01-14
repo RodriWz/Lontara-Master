@@ -24,8 +24,8 @@ class AksaraPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: Image.asset(
-              'assets/icon.png', // ganti sesuai aset kamu
-              height: 32,
+              'assets/images/kapal.png', // ganti sesuai aset kamu
+              height: 100,
             ),
           )
         ],

@@ -44,7 +44,7 @@ class SejarahPage extends StatelessWidget {
                         ],
                       ),
                       Image.asset(
-                        'assets/icon.png', // ganti sesuai aset kamu
+                        'assets/images/kapal.png', // ganti sesuai aset kamu
                         height: 32,
                       ),
                     ],

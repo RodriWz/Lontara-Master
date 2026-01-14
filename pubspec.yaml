@@ -36,6 +36,8 @@ flutter:
   uses-material-design: true
 
   assets:
-  - assets/images/email icon.jpg
+  - assets/images/Email icon.jpg
   - assets/images/pahlawawn.jpg
   - assets/images/kapal.png
+  - assets/images/logo.png
+  - assets/images/logdep.jpg

@@ -78,7 +78,7 @@ class _WellcomePageState extends State<WellcomePage> {
 
               Center(
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/logdep.png',
                   height: 180,
                 ),
               ),
