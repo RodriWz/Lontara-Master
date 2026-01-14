@@ -15,7 +15,7 @@ class VerifyEmailPage extends StatelessWidget {
 
               // IMAGE
               Image.asset(
-                "assets/images/email icon.jpg",
+                "assets/images/Email icon.jpg",
                 width: 240,
               ),
               const SizedBox(height: 20),
@@ -36,34 +36,42 @@ class VerifyEmailPage extends StatelessWidget {
 
               const SizedBox(height: 40),
 
-              // VERIFY BUTTON
-              Container(
-                width: 260,
-                height: 55,
-                decoration: BoxDecoration(
-                  color: Color(0xfff2e7dd),
-                  borderRadius: BorderRadius.circular(40),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0, 2),
-                      blurRadius: 8,
-                    )
-                  ],
-                ),
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "VERIFY EMAIL",
-                    style: TextStyle(
-                      color: Color(0xffc7a388),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-              ),
+             // VERIFY BUTTON
+Container(
+  width: 260,
+  height: 55,
+  decoration: BoxDecoration(
+    color: const Color(0xfff2e7dd),
+    borderRadius: BorderRadius.circular(40),
+    boxShadow: const [
+      BoxShadow(
+        color: Colors.black12,
+        offset: Offset(0, 2),
+        blurRadius: 8,
+      )
+    ],
+  ),
+  child: TextButton(
+    onPressed: () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
+      );
+    },
+    child: const Text(
+      "VERIFY EMAIL",
+      style: TextStyle(
+        color: Color(0xffc7a388),
+        fontWeight: FontWeight.w600,
+        fontSize: 18,
+        letterSpacing: 1,
+      ),
+    ),
+  ),
+),
+
 
               const SizedBox(height: 60),
 

@@ -39,7 +39,7 @@ class _WellcomePageState extends State<WellcomePage> {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const LontaraHomePage()),
+        MaterialPageRoute(builder: (_) => const VerifyEmailPage()),
       );
     } on FirebaseAuthException catch (e) {
       _showError(e.message ?? "Login gagal");
@@ -78,7 +78,7 @@ class _WellcomePageState extends State<WellcomePage> {
 
               Center(
                 child: Image.asset(
-                  'assets/images/logdep.png',
+                  'assets/images/logdep.jpg',
                   height: 180,
                 ),
               ),

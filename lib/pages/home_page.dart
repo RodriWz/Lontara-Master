@@ -1,187 +1,265 @@
 part of 'pages.dart';
 
-class LontaraHomePage extends StatefulWidget {
-  const LontaraHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<LontaraHomePage> createState() => _LontaraHomePageState();
-}
-
-class _LontaraHomePageState extends State<LontaraHomePage> {
-  final TextEditingController _searchController = TextEditingController();
-  bool _showSearchClear = false;
-
-  final List<Map<String, String>> _aksaraList = [
-    {'symbol': 'ᨀ', 'label': 'KA'},
-    {'symbol': 'ᨁ', 'label': 'GA'},
-    {'symbol': 'ᨂ', 'label': 'NGA'},
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    _searchController.addListener(() {
-      setState(() {
-        _showSearchClear = _searchController.text.isNotEmpty;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
-      body: SafeArea(
+      backgroundColor: Colors.white,
+      bottomNavigationBar: _bottomNavBar(),
+      body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeader(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    _buildSejarahSection(),
-                    const SizedBox(height: 24),
-                    _buildAksaraSection(),
-                    const SizedBox(height: 20),
-                  ],
-                ),
-              ),
-            ),
+            _header(),
+            const SizedBox(height: 20),
+            _sectionTitle("Sejarah"),
+            _sejarahCard(),
+            const SizedBox(height: 20),
+            _sectionTitleWithAction("Aksara", "Lihat Semua"),
+            const SizedBox(height: 12),
+            _aksaraList(),
+            const SizedBox(height: 90),
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavBar(),
     );
   }
 
   // ================= HEADER =================
-  Widget _buildHeader() {
+  Widget _header() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
+      padding: const EdgeInsets.fromLTRB(40, 40, 40, 40),
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFF5D3A1A), Color(0xFF4A2B11)],
+        color: Color(0xFF3B1F0F),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(26),
+          bottomRight: Radius.circular(26),
         ),
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
       ),
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "lontara,\nAgo Belajar Lontara!",
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFFFD700),
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "lontara,",
+                      style: TextStyle(
+                        color: Colors.orange,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      "Ayo Belajar Lontara!",
+                      style: TextStyle(
+                        color: Colors.orange,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Icon(Icons.person, color: Colors.white, size: 40),
+              const CircleAvatar(
+                radius: 20,
+                backgroundImage: AssetImage("assets/images/avatar.png"),
+              ),
             ],
           ),
-          const SizedBox(height: 20),
-          _buildSearchBar(),
+
+          const SizedBox(height: 14),
+
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                      hintText: "Makan",
+                      prefixIcon: Icon(Icons.search),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 20),
+              Image.asset(
+                "assets/images/kapal.png",
+                width: 40,
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildSearchBar() {
-    return Container(
-      height: 56,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(30),
+  // ================= SECTION TITLE =================
+  Widget _sectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
       ),
+    );
+  }
+
+  Widget _sectionTitleWithAction(String title, String action) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(width: 20),
-          const Icon(Icons.search),
-          const SizedBox(width: 12),
-          Expanded(
-            child: TextField(
-              controller: _searchController,
-              decoration: const InputDecoration(
-                hintText: "Cari kata...",
-                border: InputBorder.none,
-              ),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          if (_showSearchClear)
-            IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () => _searchController.clear(),
+          Text(
+            action,
+            style: const TextStyle(
+              color: Colors.grey,
             ),
+          ),
         ],
       ),
     );
   }
 
-  // ================= SEJARAH =================
-  Widget _buildSejarahSection() {
+  // ================= SEJARAH CARD =================
+  Widget _sejarahCard() {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: const Color(0xFFD4A574),
+          color: const Color(0xFFD2A679),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: const Text(
-          "Sejarah singkat aksara lontara...",
-          style: TextStyle(color: Colors.white),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.asset(
+                    "assets/images/pahlawawn.jpg",
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                const Expanded(
+                  child: Text(
+                    "Please use the link below to verify your email & start your journey",
+                    style: TextStyle(
+                      color: Colors.white,
+                      height: 1.4,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: const [
+                Text(
+                  "Lihat",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(width: 4),
+                Icon(Icons.arrow_forward_ios,
+                    size: 14, color: Colors.white),
+              ],
+            )
+          ],
         ),
       ),
     );
   }
 
-  // ================= AKSARA =================
-  Widget _buildAksaraSection() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: _aksaraList
-          .map((e) => _buildAksaraItem(e['symbol']!, e['label']!))
-          .toList(),
-    );
-  }
-
-  Widget _buildAksaraItem(String symbol, String label) {
-    return Column(
-      children: [
-        CircleAvatar(
-          radius: 40,
-          backgroundColor: Colors.white,
-          child: Text(
-            symbol,
-            style: const TextStyle(fontSize: 32),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(label),
-      ],
+  // ================= AKSARA LIST =================
+  Widget _aksaraList() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.generate(3, (index) {
+          return Column(
+            children: [
+              Container(
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      offset: Offset(0, 3),
+                    )
+                  ],
+                ),
+                child: const Center(
+                  child: Icon(Icons.edit, size: 30),
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                "KA",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          );
+        }),
+      ),
     );
   }
 
   // ================= BOTTOM NAV =================
-  Widget _buildBottomNavBar() {
-    return BottomNavigationBar(
-      backgroundColor: const Color(0xFF3D2516),
-      selectedItemColor: Colors.amber,
-      unselectedItemColor: Colors.white,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.translate), label: "Translate"),
-        BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: "Belajar"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profil"),
-      ],
+  Widget _bottomNavBar() {
+    return Container(
+      height: 60,
+      decoration: const BoxDecoration(
+        color: Color(0xFF3B1F0F),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: const [
+          Icon(Icons.home, color: Colors.orange),
+          Icon(Icons.translate, color: Colors.white),
+          Icon(Icons.menu_book, color: Colors.white),
+          Icon(Icons.person, color: Colors.white),
+        ],
+      ),
     );
   }
 }
